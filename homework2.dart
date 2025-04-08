@@ -12,7 +12,6 @@ class Student{
     eng = Random().nextInt(99)+1;
     math = Random().nextInt(99)+1;
   }
-  void setAvg() => avg = (kor+eng+math)/3.0;
 
 }
 
@@ -20,45 +19,41 @@ void main(){
 
   var aList = List.empty(growable: true);
 
-  for(int i =0;i<10;i++){
+  for(int i =0;i<5;i++){
     Student a = Student();
     a.name = AsciiDecoder().convert([65 + i]);
     aList.add(a);
   }
 
-  String strTable = '이름 국어 영어 수학 평균';
-  print(strTable);
-  for(int i =0; i<10;i++){
-    aList[i].setAvg();
-    print(aList[i].name.padLeft(4)+ 
-      aList[i].kor.toString().padLeft(5)+
-      aList[i].eng.toString().padLeft(5)+
-      aList[i].math.toString().padLeft(5)+
-      aList[i].avg.toStringAsFixed(2).padLeft(8));
+  print("이름, 국어, 영어, 수학, 평균");
+
+  for(int i =0; i<5;i++){
+    double avg =(aList[i].kor +aList[i].eng +aList[i].math)/3.0;
+    aList[i].avg =avg;
+    print('${aList[i].name},${aList[i].kor},${aList[i].eng},${aList[i].math},${aList[i].avg.toStringAsFixed(2)}');
   }
 
-  print("평균으로 정렬");
-  print(strTable+" 비고");
+  print('평균으로 정렬');
 
   List newList =List.from(aList);
-  newList.sort((a, b) => a.avg.compareTo(b.avg));
-
+  newList.sort((a, b)=>a.avg.compareTo(b.avg));
   for(var i in newList){
-    String str = i.name.padLeft(4)+
-      i.kor.toString().padLeft(5)+ 
-      i.eng.toString().padLeft(5)+  
-      i.math.toString().padLeft(5)+
-      i.avg.toStringAsFixed(2).padLeft(8);
-  if(i.avg >50.0){
-    str+= "PASS".padLeft(5);
-    print(str);
-  }else{
-    str+="FAIL".padLeft(5);
-    print(str);
-  }
-    
-
+    print('${i.name},${i.kor},${i.eng},${i.math},${i.avg.toStringAsFixed(2)}');
   }
 
+   print('\n평균의 자릿수 합');
+  for (var i in newList) {
+    int number = i.avg.toInt();
+    int sum = 0;
 
+    int temp = number;
+
+    while (number > 0) {
+      int digit = number % 10;
+      sum += digit;
+      number ~/= 10;
+    }
+
+    print('${i.name}의 자릿수 합: $sum');
+}
 }
