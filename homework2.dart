@@ -45,9 +45,7 @@ void main(){
   for (var i in newList) {
     int number = i.avg.toInt();
     int sum = 0;
-
-    int temp = number;
-
+    
     while (number > 0) {
       int digit = number % 10;
       sum += digit;
